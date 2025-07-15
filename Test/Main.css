@@ -1,0 +1,44 @@
+@font-face {
+    font-family: Fredoka;
+    src: url(Fredoka-Regular.ttf) format("tff");
+}
+
+.MainDiv{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(32, 32, 32);
+    position: absolute;
+}
+
+.Header{
+    top: 5%;
+    position: absolute;
+    left: 12.5%;
+    height: 10%;
+    width: 75%;
+    display: flex;
+    background-color: rgb(96, 96, 96);
+    border-radius: 50vh;
+    font-family: Fredoka;
+}
+
+.TabIsland{
+    position: relative;
+}
+
+.Main{
+    position: absolute;
+    height: 75vh;
+    width: 100vw;
+    top: 25vh;
+    background-color: rgb(48, 48, 48);
+    display: flex;
+}
+
+.Tab{
+    position: absolute;
+    height: 4vh;
+    width: 15vw;
+    border-radius: 12vh;
+}
+
