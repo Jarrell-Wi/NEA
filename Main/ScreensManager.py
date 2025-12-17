@@ -24,7 +24,6 @@ class Screen:
                     print('Pressed Slider')
                     Element.UpdateSlidePos(MousePos)
             Element.Update(Screen)
-        pygame.display.update()
         return Pressed, Called
     
     def AddElements(self, *args):
@@ -32,14 +31,14 @@ class Screen:
             self.Elements.append(i)
 
     def CollectParameters(self):
-        Set = {}
+        Parameters = {}
         # have dict with {ParameterName: Val for each element in parameter set screen}
         for Element in self.Elements:
             if Element.Parameterised:
-                Element
-
+                Parameters = Element.GiveParameter(Parameters)
+        return Parameters
 class ScreenManager:
-    def __init__(self, ):
+    def __init__(self):
 # here += Viweport mangaer only render when screen set to sim
         self.ViewportManager = AgentManager()
 
@@ -52,18 +51,27 @@ class ScreenManager:
         self.MouseInp = None
         self.Display = None
 
+    def GetSpatialData(self):
+        return self.ViewportManager.GetSpatialData()
+    
     def CollectParameters(self):
-        Parameters = self.Screens[self.Current].CollectParameters()
-
+        self.Parameters = self.Screens[self.Current].CollectParameters()
+        self.Parameters['Bounds'] = ((80, 880), (60, 660))
+        self.Parameters['Screen'] = self.Display
+    
+    def GetAgentStats(self):
+        return self.ViewportManager.GetAgentStats()
     def UpdateScreen(self):
-        if self.Current == 'SimViewPort':
-            self.SimStep()
         FuncName, Called = self.Screens[self.Current].DrawElements(self.MousePos, self.MouseInp, self.Display)
+        if self.Current == 'SimViewPort':
+            self.ViewportManager.Update(self.Display)
         return FuncName, Called
 
     def PrepareSim(self):
-
+        print(self.Parameters)
+        self.ViewportManager.PrepareSim(self.Parameters)
         return
+    
     def SetScreen(self, ScreenName):
        if ScreenName in self.Screens:
             self.Previous = self.Current

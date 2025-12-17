@@ -23,7 +23,10 @@ def SimParameters():
     SimParameters = Screen('SimParameters', (48, 48, 48))
     Title = Label(640, 180, 'Select Simulation Parameters')
 
-    AgentCount = Slider(SliderImage, SlideButtonImage, 200, 200, '', 'Slide')
+    HunterCountTitle = Label(1080, 100, 'Hunter Count')
+    HunterCount = Slider(SliderImage, SlideButtonImage, 1080, 150, '', 'HunterCount')
+    RunnerCountTitle = Label(1080, 250, 'Runner Count')
+    RunnerCount = Slider(SliderImage, SlideButtonImage, 1080, 300, '', 'RunnerCount')
     
 
     Start = Button(ButtonImageWide, 640, 600, 'Start Simulation', 'StartSim')
@@ -31,7 +34,7 @@ def SimParameters():
 
     Back.SetHoverColour('red')
 
-    SimParameters.AddElements(Title, Start, Back, AgentCount)
+    SimParameters.AddElements(Title, Start, Back, HunterCount,HunterCountTitle,  RunnerCount, RunnerCountTitle)
     return SimParameters
 
 def SimViewPort():

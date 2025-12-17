@@ -64,9 +64,9 @@ class Slider(Button):
         self.SlideImage = SlideImage
         self.SlideRect = self.SlideImage.get_rect(center = (self.SlideX, self.SlideY))
 
-        self.Min = 20
+        self.Min = 1
         self.ButtonIncrement = self.Min
-        self.Increment = 20
+        self.Increment = 5
         self.ButtonRect = self.ButtonImage.get_rect(center = (self.XRight, self.SlideY))
         self.Dragging = False
         self.PrevMouseLeft = 0
@@ -102,13 +102,19 @@ class Slider(Button):
             elif XPos < self.XRight:
                 XPos = self.XRight
             else:
-                XPos -= 1
+                if XPos % self.Increment > self.Increment // 2:
+                    XPos += 1
+                else:
+                    XPos -= 1
         self.ButtonIncrement = self.Min +((XPos - self.XRight) // self.Increment)
         
         self.XPos = XPos
         self.ButtonRect = self.ButtonImage.get_rect(center = (self.XPos, self.YPos))
 
-
+    def GiveParameter(self, ParameterDict):
+        ParameterDict[self.Func] = self.ButtonIncrement
+        return ParameterDict
+        
                 
     
     
